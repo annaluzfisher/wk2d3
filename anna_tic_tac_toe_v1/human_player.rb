@@ -1,11 +1,10 @@
 class HumanPlayer
 attr_reader :mark
     def initialize(mark_value)
-       allowed = %w(x X o O)
-        if !allowed.include?(mark_value)
-            puts "only Xs and Os allowed!"
+        unless mark_value == :X || mark_value == :O
+            raise ArgumentError.new  "only Xs and Os allowed!"
         end
-        @mark = mark_value.upcase
+        @mark = mark_value
     end
 
     def get_position
@@ -18,7 +17,7 @@ attr_reader :mark
                     return self.get_position
               end
         end
-       return [position[0].to_i,position[-1].to_i]
+       return [[position[0].to_i , position[-1].to_i], [@mark]]
     end
 
 end
